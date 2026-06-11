@@ -94,19 +94,19 @@ const Dashboard: React.FC = () => {
       indicator: radarData.map(d => ({ name: d.name, max: d.max })),
       shape: 'polygon',
       splitNumber: 5,
-      axisName: { color: '#8ba3c7', fontSize: 10 },
-      splitLine: { lineStyle: { color: '#1a3a5c' } },
-      splitArea: { areaStyle: { color: ['rgba(24,144,255,0.02)', 'rgba(24,144,255,0.05)'] } },
-      axisLine: { lineStyle: { color: '#1a3a5c' } }
+      axisName: { color: '#b0c8e8', fontSize: 10 },
+      splitLine: { lineStyle: { color: 'rgba(59,130,246,0.2)' } },
+      splitArea: { areaStyle: { color: ['rgba(59,130,246,0.02)', 'rgba(59,130,246,0.05)'] } },
+      axisLine: { lineStyle: { color: 'rgba(59,130,246,0.2)' } }
     },
     series: [{
       type: 'radar',
       data: [{
         value: radarData.map(d => d.score),
         name: 'Score',
-        areaStyle: { color: 'rgba(24,144,255,0.3)' },
-        lineStyle: { color: '#1890ff' },
-        itemStyle: { color: '#1890ff' }
+        areaStyle: { color: 'rgba(59,130,246,0.3)' },
+        lineStyle: { color: '#3b82f6' },
+        itemStyle: { color: '#3b82f6' }
       }]
     }]
   };
@@ -114,7 +114,7 @@ const Dashboard: React.FC = () => {
   const scoreDistribution = [
     { range: '0-2', count: allResults.filter(r => r.normalizedScore <= 2).length, color: '#ff4d4f' },
     { range: '3-4', count: allResults.filter(r => r.normalizedScore > 2 && r.normalizedScore <= 4).length, color: '#faad14' },
-    { range: '5-6', count: allResults.filter(r => r.normalizedScore > 4 && r.normalizedScore <= 6).length, color: '#1890ff' },
+    { range: '5-6', count: allResults.filter(r => r.normalizedScore > 4 && r.normalizedScore <= 6).length, color: '#3b82f6' },
     { range: '7-8', count: allResults.filter(r => r.normalizedScore > 6 && r.normalizedScore <= 8).length, color: '#36cfc9' },
     { range: '9-10', count: allResults.filter(r => r.normalizedScore > 8).length, color: '#52c41a' }
   ];
@@ -124,14 +124,14 @@ const Dashboard: React.FC = () => {
     xAxis: {
       type: 'category',
       data: scoreDistribution.map(d => d.range),
-      axisLine: { lineStyle: { color: '#1a3a5c' } },
-      axisLabel: { color: '#8ba3c7' }
+      axisLine: { lineStyle: { color: 'rgba(59,130,246,0.2)' } },
+      axisLabel: { color: '#b0c8e8' }
     },
     yAxis: {
       type: 'value',
-      axisLine: { lineStyle: { color: '#1a3a5c' } },
-      axisLabel: { color: '#8ba3c7' },
-      splitLine: { lineStyle: { color: '#1a3a5c30' } }
+      axisLine: { lineStyle: { color: 'rgba(59,130,246,0.2)' } },
+      axisLabel: { color: '#b0c8e8' },
+      splitLine: { lineStyle: { color: 'rgba(59,130,246,0.2)30' } }
     },
     series: [{
       type: 'bar',
@@ -180,7 +180,7 @@ const Dashboard: React.FC = () => {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-        <Title level={3} style={{ margin: 0, color: '#e6f0ff' }}>
+        <Title level={3} style={{ margin: 0, color: '#f0f6ff' }}>
           <SafetyCertificateOutlined /> {t.dashboard.title}
         </Title>
         <Space>
@@ -220,7 +220,7 @@ const Dashboard: React.FC = () => {
             {radarData.length > 0 ? (
               <ReactECharts option={radarOption} style={{ height: 300 }} />
             ) : (
-              <div style={{ textAlign: 'center', padding: 80, color: '#8ba3c7' }}>
+              <div style={{ textAlign: 'center', padding: 80, color: '#b0c8e8' }}>
                 {t.dashboard.noCheckData}
               </div>
             )}
@@ -231,7 +231,7 @@ const Dashboard: React.FC = () => {
             {allResults.length > 0 ? (
               <ReactECharts option={barOption} style={{ height: 300 }} />
             ) : (
-              <div style={{ textAlign: 'center', padding: 80, color: '#8ba3c7' }}>
+              <div style={{ textAlign: 'center', padding: 80, color: '#b0c8e8' }}>
                 {t.dashboard.noRepos}
               </div>
             )}

@@ -6,44 +6,73 @@ interface ThemeState {
   setTheme: (theme: string) => void;
 }
 
+const themeMap: Record<string, Record<string, string>> = {
+  'tech-blue': {
+    '--primary': '#3b82f6',
+    '--primary-light': '#60a5fa',
+    '--primary-glow': 'rgba(59, 130, 246, 0.15)',
+    '--bg-primary': 'rgba(10, 22, 44, 0.95)',
+    '--bg-secondary': 'rgba(6, 13, 26, 0.95)',
+    '--bg-card': 'rgba(17, 33, 60, 0.65)',
+    '--text-primary': '#f0f6ff',
+    '--text-secondary': '#b0c8e8',
+    '--text-muted': '#7a9bc5',
+    '--border': 'rgba(59, 130, 246, 0.2)',
+    '--border-light': 'rgba(59, 130, 246, 0.35)',
+  },
+  'dark-green': {
+    '--primary': '#22c55e',
+    '--primary-light': '#4ade80',
+    '--primary-glow': 'rgba(34, 197, 94, 0.15)',
+    '--bg-primary': 'rgba(8, 28, 16, 0.95)',
+    '--bg-secondary': 'rgba(4, 18, 8, 0.95)',
+    '--bg-card': 'rgba(12, 40, 22, 0.65)',
+    '--text-primary': '#f0fff0',
+    '--text-secondary': '#a8e6a8',
+    '--text-muted': '#6bb86b',
+    '--border': 'rgba(34, 197, 94, 0.2)',
+    '--border-light': 'rgba(34, 197, 94, 0.35)',
+  },
+  'dark-purple': {
+    '--primary': '#8b5cf6',
+    '--primary-light': '#a78bfa',
+    '--primary-glow': 'rgba(139, 92, 246, 0.15)',
+    '--bg-primary': 'rgba(16, 8, 36, 0.95)',
+    '--bg-secondary': 'rgba(10, 4, 24, 0.95)',
+    '--bg-card': 'rgba(24, 14, 52, 0.65)',
+    '--text-primary': '#f8f0ff',
+    '--text-secondary': '#c8a8e8',
+    '--text-muted': '#9070c0',
+    '--border': 'rgba(139, 92, 246, 0.2)',
+    '--border-light': 'rgba(139, 92, 246, 0.35)',
+  },
+  'light': {
+    '--primary': '#3b82f6',
+    '--primary-light': '#2563eb',
+    '--primary-glow': 'rgba(59, 130, 246, 0.1)',
+    '--bg-primary': '#ffffff',
+    '--bg-secondary': '#f5f5f5',
+    '--bg-card': 'rgba(255, 255, 255, 0.9)',
+    '--text-primary': '#262626',
+    '--text-secondary': '#595959',
+    '--text-muted': '#8c8c8c',
+    '--border': 'rgba(0, 0, 0, 0.1)',
+    '--border-light': 'rgba(0, 0, 0, 0.15)',
+  },
+};
+
 export const useThemeStore = create<ThemeState>((set) => ({
   current: 'tech-blue',
   themes: [
-    { id: 'tech-blue', name: 'Tech Blue', color: '#1890ff' },
-    { id: 'dark-green', name: 'Dark Green', color: '#52c41a' },
-    { id: 'dark-purple', name: 'Dark Purple', color: '#722ed1' },
-    { id: 'light', name: 'Light', color: '#f5f5f5' }
+    { id: 'tech-blue', name: 'Tech Blue', color: '#3b82f6' },
+    { id: 'dark-green', name: 'Dark Green', color: '#22c55e' },
+    { id: 'dark-purple', name: 'Dark Purple', color: '#8b5cf6' },
+    { id: 'light', name: 'Light', color: '#f5f5f5' },
   ],
   setTheme: (theme) => {
-    document.documentElement.style.setProperty('--primary', getPrimaryColor(theme));
-    document.documentElement.style.setProperty('--bg-primary', getBgPrimary(theme));
-    document.documentElement.style.setProperty('--bg-secondary', getBgSecondary(theme));
-    document.documentElement.style.setProperty('--bg-card', getBgCard(theme));
-    document.documentElement.style.setProperty('--text-primary', getTextPrimary(theme));
-    document.documentElement.style.setProperty('--text-secondary', getTextSecondary(theme));
-    document.documentElement.style.setProperty('--border', getBorder(theme));
+    const vars = themeMap[theme] || themeMap['tech-blue'];
+    const root = document.documentElement;
+    Object.entries(vars).forEach(([key, value]) => root.style.setProperty(key, value));
     set({ current: theme });
-  }
+  },
 }));
-
-function getPrimaryColor(t: string): string {
-  return { 'tech-blue': '#1890ff', 'dark-green': '#52c41a', 'dark-purple': '#722ed1', 'light': '#1890ff' }[t] || '#1890ff';
-}
-function getBgPrimary(t: string): string {
-  return { 'tech-blue': '#0a1628', 'dark-green': '#0a1a0d', 'dark-purple': '#140a28', 'light': '#ffffff' }[t] || '#0a1628';
-}
-function getBgSecondary(t: string): string {
-  return { 'tech-blue': '#060d1a', 'dark-green': '#061208', 'dark-purple': '#0d061a', 'light': '#f5f5f5' }[t] || '#060d1a';
-}
-function getBgCard(t: string): string {
-  return { 'tech-blue': '#111d33', 'dark-green': '#112a15', 'dark-purple': '#1d1133', 'light': '#ffffff' }[t] || '#111d33';
-}
-function getTextPrimary(t: string): string {
-  return { 'tech-blue': '#e6f0ff', 'dark-green': '#e6ffe6', 'dark-purple': '#f0e6ff', 'light': '#262626' }[t] || '#e6f0ff';
-}
-function getTextSecondary(t: string): string {
-  return { 'tech-blue': '#8ba3c7', 'dark-green': '#8bc78b', 'dark-purple': '#a38bc7', 'light': '#595959' }[t] || '#8ba3c7';
-}
-function getBorder(t: string): string {
-  return { 'tech-blue': '#1a3a5c', 'dark-green': '#1a5c2a', 'dark-purple': '#3a1a5c', 'light': '#d9d9d9' }[t] || '#1a3a5c';
-}

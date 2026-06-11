@@ -10,7 +10,8 @@ import {
   RedoOutlined,
   VideoCameraOutlined,
   HistoryOutlined,
-  GlobalOutlined
+  GlobalOutlined,
+  FileTextOutlined
 } from '@ant-design/icons';
 import { useThemeStore } from './stores/theme';
 import { useHistoryStore } from './stores/history';
@@ -19,6 +20,7 @@ import Dashboard from './pages/Dashboard';
 import Repos from './pages/Repos';
 import CheckResults from './pages/CheckResults';
 import Settings from './pages/Settings';
+import Rules from './pages/Rules';
 
 const { Header, Sider, Content } = Layout;
 
@@ -34,6 +36,7 @@ const App: React.FC = () => {
     { key: '/', icon: <DashboardOutlined />, label: t.menu.dashboard },
     { key: '/repos', icon: <BranchesOutlined />, label: t.menu.repos },
     { key: '/checks', icon: <SafetyCertificateOutlined />, label: t.menu.checks },
+    { key: '/rules', icon: <FileTextOutlined />, label: t.menu.rules },
     { key: '/settings', icon: <SettingOutlined />, label: t.menu.settings }
   ];
 
@@ -137,6 +140,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Dashboard />} />
             <Route path="/repos" element={<Repos />} />
             <Route path="/checks" element={<CheckResults />} />
+            <Route path="/rules" element={<Rules />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </Content>

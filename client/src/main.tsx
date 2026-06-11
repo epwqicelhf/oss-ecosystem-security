@@ -23,50 +23,50 @@ function getAntTheme(themeName: string) {
   const themes: Record<string, { token: Record<string, unknown> }> = {
     'tech-blue': {
       token: {
-        colorPrimary: '#1890ff',
-        colorBgContainer: '#0a1628',
-        colorBgLayout: '#060d1a',
-        colorBgElevated: '#111d33',
-        colorText: '#e6f0ff',
-        colorTextSecondary: '#8ba3c7',
-        colorBorder: '#1a3a5c',
+        colorPrimary: '#3b82f6',
+        colorBgContainer: 'rgba(17, 33, 60, 0.65)',
+        colorBgLayout: 'rgba(6, 13, 26, 0.95)',
+        colorBgElevated: 'rgba(10, 22, 44, 0.95)',
+        colorText: '#f0f6ff',
+        colorTextSecondary: '#b0c8e8',
+        colorBorder: 'rgba(59, 130, 246, 0.2)',
         borderRadius: 8,
         fontFamily: "'Inter', 'Noto Sans SC', -apple-system, sans-serif"
       }
     },
     'dark-green': {
       token: {
-        colorPrimary: '#52c41a',
-        colorBgContainer: '#0a1a0d',
-        colorBgLayout: '#061208',
-        colorBgElevated: '#112a15',
-        colorText: '#e6ffe6',
-        colorTextSecondary: '#8bc78b',
-        colorBorder: '#1a5c2a',
+        colorPrimary: '#22c55e',
+        colorBgContainer: 'rgba(12, 40, 22, 0.65)',
+        colorBgLayout: 'rgba(4, 18, 8, 0.95)',
+        colorBgElevated: 'rgba(8, 28, 16, 0.95)',
+        colorText: '#f0fff0',
+        colorTextSecondary: '#a8e6a8',
+        colorBorder: 'rgba(34, 197, 94, 0.2)',
         borderRadius: 8
       }
     },
     'dark-purple': {
       token: {
-        colorPrimary: '#722ed1',
-        colorBgContainer: '#140a28',
-        colorBgLayout: '#0d061a',
-        colorBgElevated: '#1d1133',
-        colorText: '#f0e6ff',
-        colorTextSecondary: '#a38bc7',
-        colorBorder: '#3a1a5c',
+        colorPrimary: '#8b5cf6',
+        colorBgContainer: 'rgba(24, 14, 52, 0.65)',
+        colorBgLayout: 'rgba(10, 4, 24, 0.95)',
+        colorBgElevated: 'rgba(16, 8, 36, 0.95)',
+        colorText: '#f8f0ff',
+        colorTextSecondary: '#c8a8e8',
+        colorBorder: 'rgba(139, 92, 246, 0.2)',
         borderRadius: 8
       }
     },
     'light': {
       token: {
-        colorPrimary: '#1890ff',
-        colorBgContainer: '#ffffff',
+        colorPrimary: '#3b82f6',
+        colorBgContainer: 'rgba(255, 255, 255, 0.9)',
         colorBgLayout: '#f5f5f5',
         colorBgElevated: '#ffffff',
         colorText: '#262626',
         colorTextSecondary: '#595959',
-        colorBorder: '#d9d9d9',
+        colorBorder: 'rgba(0, 0, 0, 0.1)',
         borderRadius: 8
       }
     }

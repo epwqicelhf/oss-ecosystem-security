@@ -29,6 +29,7 @@ export const translations = {
       dashboard: '仪表盘',
       repos: '仓库管理',
       checks: '检查结果',
+      rules: '检查规则',
       settings: '设置'
     },
     header: {
@@ -207,6 +208,7 @@ export const translations = {
       dashboard: 'Dashboard',
       repos: 'Repositories',
       checks: 'Check Results',
+      rules: 'Check Rules',
       settings: 'Settings'
     },
     header: {

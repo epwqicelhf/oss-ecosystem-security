@@ -1,11 +1,49 @@
+export type Platform = 'atomgit' | 'github' | 'gitlab' | 'gitcode';
+
+export interface PlatformConfig {
+  id: Platform;
+  name: string;
+  name_zh: string;
+  apiBase: string;
+}
+
+export const PLATFORMS: PlatformConfig[] = [
+  { id: 'atomgit', name: 'AtomGit', name_zh: 'AtomGit', apiBase: 'https://api.atomgit.com/api/v5' },
+  { id: 'github', name: 'GitHub', name_zh: 'GitHub', apiBase: 'https://api.github.com' },
+  { id: 'gitlab', name: 'GitLab', name_zh: 'GitLab', apiBase: '' },
+  { id: 'gitcode', name: 'GitCode', name_zh: 'GitCode', apiBase: 'https://api.gitcode.com/api/v5' },
+];
+
+export function detectPlatform(url: string): Platform {
+  const lower = url.toLowerCase();
+  if (lower.includes('atomgit.com')) return 'atomgit';
+  if (lower.includes('github.com')) return 'github';
+  if (lower.includes('gitlab.com') || lower.includes('gitlab')) return 'gitlab';
+  if (lower.includes('gitcode.com') || lower.includes('gitcode')) return 'gitcode';
+  return 'atomgit';
+}
+
+export function parseRepoUrl(url: string): { owner: string; repo: string; platform: Platform } {
+  const platform = detectPlatform(url);
+  const cleaned = url.replace(/\.git$/, '').replace(/\/+$/, '');
+  const parts = cleaned.split('/').filter(Boolean);
+  const repo = parts[parts.length - 1] || '';
+  const owner = parts[parts.length - 2] || '';
+  return { owner, repo, platform };
+}
+
 export interface RepoConfig {
   id: string;
   name: string;
   url: string;
+  owner: string;
+  repo: string;
   branch: string;
   localPath: string;
   addedAt: string;
   lastChecked?: string;
+  platform: Platform;
+  apiToken?: string;
 }
 
 export type Severity = 'critical' | 'high' | 'medium' | 'low';
@@ -16,6 +54,13 @@ export const SEVERITY_WEIGHTS: Record<Severity, number> = {
   medium: 5,
   low: 2.5
 };
+
+export interface ApiInfo {
+  platform: string;
+  endpoint: string;
+  description: string;
+  description_zh: string;
+}
 
 export interface ScoringRule {
   id: string;
@@ -29,6 +74,10 @@ export interface ScoringRule {
   pass_condition_zh: string;
   reference_format?: string;
   reference_format_zh?: string;
+  api_sources?: ApiInfo[];
+  detection_fields?: { field: string; description: string; description_zh: string }[];
+  reasoning?: string;
+  reasoning_zh?: string;
   max_points: number;
   deduction: number;
   deduction_reason: string;
@@ -52,7 +101,18 @@ export interface CheckProbe {
   outcome: 'pass' | 'fail' | 'warning' | 'not_applicable';
   findings: ProbeFinding[];
   scoring_rules: ScoringRule[];
+  reference_items?: ReferenceItem[];
   remediation?: Remediation;
+}
+
+export interface ReferenceItem {
+  name: string;
+  name_zh: string;
+  found: boolean;
+  reference_format?: string;
+  reference_format_zh?: string;
+  paths_checked: string[];
+  paths_grouped?: { group: string; group_zh: string; paths: string[] }[];
 }
 
 export interface ProbeFinding {
@@ -117,6 +177,7 @@ export const CATEGORY_SEVERITY: Record<CheckCategory, Severity> = {
 export interface CheckResult {
   repoId: string;
   repoName: string;
+  platform: Platform;
   checkedAt: string;
   totalWeightedScore: number;
   totalWeightSum: number;
@@ -150,6 +211,10 @@ export interface AppConfig {
   commitDepth: number;
   enabledCategories: CheckCategory[];
   theme: string;
+  proxy?: {
+    http?: string;
+    https?: string;
+  };
 }
 
 export const DEFAULT_CONFIG: AppConfig = {

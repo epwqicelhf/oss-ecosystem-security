@@ -60,7 +60,7 @@ const Settings: React.FC = () => {
   };
 
   const severityColor = (s: string) => {
-    return { critical: '#cf1322', high: '#ff4d4f', medium: '#faad14', low: '#1890ff' }[s] || '#8c8c8c';
+    return { critical: '#cf1322', high: '#ff4d4f', medium: '#faad14', low: '#3b82f6' }[s] || '#8c8c8c';
   };
 
   const categoryColumns = [
@@ -90,7 +90,7 @@ const Settings: React.FC = () => {
 
   return (
     <div>
-      <Title level={3} style={{ margin: 0, marginBottom: 24, color: '#e6f0ff' }}>
+      <Title level={3} style={{ margin: 0, marginBottom: 24, color: '#f0f6ff' }}>
         <SettingOutlined /> {t.settings.title}
       </Title>
 
@@ -138,7 +138,7 @@ const Settings: React.FC = () => {
           pagination={false}
           size="small"
         />
-        <div style={{ marginTop: 16, fontSize: 13, color: '#8ba3c7' }}>
+        <div style={{ marginTop: 16, fontSize: 13, color: '#b0c8e8' }}>
           {t.settings.categoriesDesc}
         </div>
       </Card>

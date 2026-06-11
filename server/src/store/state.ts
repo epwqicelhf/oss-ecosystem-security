@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync, readFileSync } from 'fs';
 import { join } from 'path';
-import type { RepoConfig, AppConfig, CheckResult, AppState, DEFAULT_CONFIG } from '../types';
+import type { AppConfig, AppState } from '../types';
 
 const DATA_DIR = join(process.cwd(), 'data');
 const STATE_FILE = join(DATA_DIR, 'state.json');
@@ -42,4 +42,4 @@ function getDefaultConfig(): AppConfig {
   };
 }
 
-export { loadState, saveState, DATA_DIR, STATE_FILE };
+export { loadState, saveState, DATA_DIR };
